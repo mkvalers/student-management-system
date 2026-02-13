@@ -59,7 +59,7 @@ git clone https://github.com/mkvalers/spring-student-management-api.git
 cd spring-student-management-api
 ```
 
-2. **Set environment variables** in a `.env` file or directly in `application.yml-dev`:
+2. **Set environment variables** in a `.env` file or directly in `application-dev.yml`:
 
 ```properties
 DATABASE_URL=jdbc:mysql://localhost:3306/school_api_db?createDatabaseIfNotExist=true
