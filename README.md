@@ -1,4 +1,4 @@
-# Spring Student Management System
+# Student Management System
 
 > Backend is fully implemented; frontend development is ongoing.
 
