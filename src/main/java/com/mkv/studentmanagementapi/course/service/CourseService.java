@@ -30,8 +30,7 @@ public class CourseService {
     }
 
     public CourseResponse createCourse(CreateCourseRequest request) {
-        var exists = courseRepository.existsByCourseCodeOrCourseName(request.getCourseCode(), request.getCourseName());
-
+        var exists = courseRepository.existsByCourseCodeOrName(request.getCourseCode(), request.getCourseName());
         if (exists) throw new DuplicateCourseExceptionException();
 
         var course = courseMapper.toEntity(request);
@@ -43,7 +42,7 @@ public class CourseService {
     public void updateCourse(Long courseId, UpdateCourseRequest request) {
         var course = courseRepository.findById(courseId).orElseThrow(CourseNotFoundException::new);
 
-        var exists = courseRepository.existsByCourseCodeOrCourseName(request.getCourseCode(), request.getCourseName());
+        var exists = courseRepository.existsByCourseCodeOrName(request.getCourseCode(), request.getCourseName());
         if (exists) throw new DuplicateCourseExceptionException();
 
         courseMapper.update(request, course);

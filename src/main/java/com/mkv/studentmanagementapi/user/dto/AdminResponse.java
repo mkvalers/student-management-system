@@ -12,5 +12,4 @@ public class AdminResponse {
     private String email;
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
 }

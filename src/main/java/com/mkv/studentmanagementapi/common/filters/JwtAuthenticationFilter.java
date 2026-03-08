@@ -1,6 +1,6 @@
 package com.mkv.studentmanagementapi.common.filters;
 
-import com.mkv.studentmanagementapi.user.service.JwtService;
+import com.mkv.studentmanagementapi.authentication.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

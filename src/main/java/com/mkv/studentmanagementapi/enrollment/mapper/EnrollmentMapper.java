@@ -10,18 +10,23 @@ import com.mkv.studentmanagementapi.student.entity.Student;
 import com.mkv.studentmanagementapi.student.dto.StudentResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface EnrollmentMapper {
-    @Mapping(target = "studentName", expression = "java(enrollment.getStudentName())")
-    @Mapping(target = "courseName", source = "course.courseName")
+    @Mappings({
+        @Mapping(target = "studentName", expression = "java(enrollment.getStudentName())"),
+        @Mapping(target = "courseName", source = "course.courseName")
+    })
     EnrollmentDto toDto(Enrollment enrollment);
 
-    @Mapping(target = "enrollmentId", source = "id")
-    @Mapping(target = "courseId", source = "course.id")
-    @Mapping(target = "courseName", source = "course.courseName")
+    @Mappings ({
+        @Mapping(target = "enrollmentId", source = "id"),
+        @Mapping(target = "courseId", source = "course.id"),
+        @Mapping(target = "courseName", source = "course.courseName")
+    })
     EnrollmentResponse toResponse(Enrollment enrollment);
 
     @Mapping(target = "studentName", expression = "java(student.getFullName())")

@@ -1,5 +1,6 @@
 package com.mkv.studentmanagementapi.user.service;
 
+import com.mkv.studentmanagementapi.authentication.service.user.UserAuthUtils;
 import com.mkv.studentmanagementapi.student.mapper.StudentMapper;
 import com.mkv.studentmanagementapi.student.repository.StudentRepository;
 import com.mkv.studentmanagementapi.user.dto.UpdateInfoRequest;

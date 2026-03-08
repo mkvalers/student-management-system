@@ -1,6 +1,6 @@
 package com.mkv.studentmanagementapi.common.exception;
 
-import com.mkv.studentmanagementapi.user.exception.AccessTokenNotValidException;
+import com.mkv.studentmanagementapi.authentication.exception.AccessTokenNotValidException;
 import com.mkv.studentmanagementapi.user.exception.DuplicateEmailException;
 import com.mkv.studentmanagementapi.user.exception.RoleNotFoundException;
 import com.mkv.studentmanagementapi.course.exception.DuplicateCourseExceptionException;
