@@ -3,7 +3,7 @@
 > Backend is fully implemented; frontend development is ongoing.
 
 ## Overview
-This repository contains the **Spring Student Management System**.
+This repository contains the **Student Management System**.
 
 - The **backend** is complete, featuring RESTful APIs for managing students, courses, users, JWT-based authentication, and role-based access control.  
 - **Frontend implementation is ongoing**, built with **React + TypeScript + Vite**.  
