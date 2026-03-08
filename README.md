@@ -23,8 +23,7 @@ For **full backend details, setup instructions, and API documentation**, see the
 ## Highlights
 - ✅ User authentication & role-based access  
 - ✅ CRUD for Students, Courses, Enrollments  
-- ✅ Swagger API docs and Postman testing  
-- ✅ Live deployment available  
+- ✅ Swagger API docs and Postman testing   
 
 ---
 
