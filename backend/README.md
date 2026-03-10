@@ -62,9 +62,9 @@ cd spring-student-management-api
 2. **Set environment variables** in a `.env` file or directly in `application-dev.yml`:
 
 ```properties
-DATABASE_URL=jdbc:mysql://localhost:3306/school_api_db?createDatabaseIfNotExist=true
-DATABASE_USER=root
-DATABASE_PASS=password
+DATABASE_URL=your_database_url(ex: jdbc:mysql://localhost:3306)
+DATABASE_USER=your_username
+DATABASE_PASS=your_password
 JWT_SECRET=your_jwt_secret_key
 ```
 

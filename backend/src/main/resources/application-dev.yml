@@ -1,8 +1,7 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
+    url: ${DATABASE_URL}/school_api_db?createDatabaseIfNotExist=true
     username: ${DATABASE_USER}
     password: ${DATABASE_PASS}
   jpa:
     show-sql: true
-websiteUrl: http://localhost:8080

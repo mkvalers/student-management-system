@@ -1,6 +1,6 @@
 spring:
   application:
-    name: University Enrollment System
+    name: Student Management System
   jwt:
     secret: ${JWT_SECRET}
     accessTokenExpiration: 300 #5m
