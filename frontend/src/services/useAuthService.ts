@@ -1,4 +1,4 @@
-import apiClient from '@/lib/axios';
+import apiClient from '@/api/apiClient';
 
 /**
  * Login payload for the authentication endpoint.
@@ -15,6 +15,14 @@ export interface JwtResponse {
    token: string;
 }
 
+class AuthService {
+   
+   private endpoint: string;
+
+   constructor(endpoint: string) {
+      this.endpoint = endpoint;
+   }
+
 /**
  * Authenticates a user with email and password.
  * On success, the server sets a refresh token cookie automatically.
@@ -22,7 +30,12 @@ export interface JwtResponse {
  * @param credentials - The user's email and password
  * @returns The JWT access token response
  */
-export const login = async (credentials: LoginRequest): Promise<JwtResponse> => {
-   const { data } = await apiClient.post<JwtResponse>('/auth/login', credentials);
-   return data;
-};
+  login = async (credentials: LoginRequest): Promise<JwtResponse> => {
+      const { data } = await apiClient.post<JwtResponse>(`${this.endpoint}/login`, credentials);
+      return data;
+   }
+}
+
+const useAuthService = new AuthService('/auth');
+
+export default useAuthService;

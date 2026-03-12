@@ -15,6 +15,12 @@ const apiClient = axios.create({
    withCredentials: true,
 });
 
+const redirectToLoginPage = () => {
+   if (window.location.pathname !== '/login') {
+      window.location.replace('/login');
+   }
+};
+
 // Attach the in-memory access token to each outgoing request.
 apiClient.interceptors.request.use((config) => {
    const token = useAuthStore.getState().accessToken;
@@ -36,9 +42,10 @@ apiClient.interceptors.response.use(
 
       const is401 = error.response?.status === 401;
       const isRefreshEndpoint = originalRequest.url?.includes('/auth/refresh');
+      const isLoginEndpoint = originalRequest.url?.includes('/auth/login');
       const alreadyRetried = originalRequest._retry;
 
-      if (is401 && !isRefreshEndpoint && !alreadyRetried) {
+      if (is401 && !isRefreshEndpoint && !isLoginEndpoint && !alreadyRetried) {
          originalRequest._retry = true;
 
          try {
@@ -50,7 +57,13 @@ apiClient.interceptors.response.use(
             return apiClient(originalRequest);
          } catch {
             useAuthStore.getState().clearAuth();
+            redirectToLoginPage();
          }
+      }
+
+      if (is401 && !isLoginEndpoint) {
+         useAuthStore.getState().clearAuth();
+         redirectToLoginPage();
       }
 
       return Promise.reject(error);
