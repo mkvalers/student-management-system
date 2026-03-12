@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { login } from '@/services/auth.service';
+import useAuthService from '@/services/useAuthService';
 import useAuthStore from '@/stores/auth.store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
@@ -50,7 +50,7 @@ const LoginPage = () => {
       setSubmitError('');
 
       try {
-         const response = await login(values);
+         const response = await useAuthService.login(values);
          setAccessToken(response.token);
       } catch {
          setSubmitError('Invalid email or password.');
