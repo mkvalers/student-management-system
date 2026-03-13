@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import {
    Card,
-   CardAction,
    CardContent,
    CardDescription,
    CardFooter,
@@ -13,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import useAuthService from '@/services/useAuthService';
 import useAuthStore from '@/stores/auth.store';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useLoginForm, { type LoginFormValues } from './hooks/useLoginForm';
 
 /**
@@ -23,6 +23,7 @@ import useLoginForm, { type LoginFormValues } from './hooks/useLoginForm';
 const LoginPage = () => {
    const [submitError, setSubmitError] = useState<string>('');
    const setAccessToken = useAuthStore((state) => state.setAccessToken);
+   const navigate = useNavigate();
    const {
       register,
       handleSubmit,
@@ -35,80 +36,82 @@ const LoginPage = () => {
       try {
          const response = await useAuthService.login(values);
          setAccessToken(response.token);
+         navigate('/');
       } catch {
          setSubmitError('Invalid email or password.');
       }
    };
 
    return (
-      <Card className="w-full max-w-sm">
-         <CardHeader>
-            <CardTitle>Login to your account</CardTitle>
-            <CardDescription>
-               Enter your email below to login to your account
-            </CardDescription>
-            <CardAction>
-               <Button variant="link">Sign Up</Button>
-            </CardAction>
-         </CardHeader>
-         <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)}>
-               <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
-                     <Label htmlFor="email">Email</Label>
-                     <Input
-                        id="email"
-                        type="email"
-                        placeholder="m@example.com"
-                        autoComplete="email"
-                        {...register('email')}
-                     />
-                     {errors.email && (
-                        <p className="text-destructive text-sm">
-                           {errors.email.message}
-                        </p>
-                     )}
-                  </div>
-                  <div className="grid gap-2">
-                     <div className="flex items-center">
-                        <Label htmlFor="password">Password</Label>
-                        <a
-                           href="#"
-                           className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                        >
-                           Forgot your password?
-                        </a>
+      <div className="flex min-h-screen items-center justify-center p-4">
+         <Card className="w-full max-w-sm">
+            <CardHeader>
+               <CardTitle>Login to your account</CardTitle>
+               <CardDescription>
+                  Enter your email below to login to your account
+               </CardDescription>
+            </CardHeader>
+            <CardContent>
+               <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="flex flex-col gap-6">
+                     <div className="grid gap-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                           id="email"
+                           type="email"
+                           placeholder="m@example.com"
+                           autoComplete="email"
+                           {...register('email')}
+                        />
+                        {errors.email && (
+                           <p className="text-destructive text-sm">
+                              {errors.email.message}
+                           </p>
+                        )}
                      </div>
-                     <Input
-                        id="password"
-                        type="password"
-                        autoComplete="current-password"
-                        {...register('password')}
-                     />
-                     {errors.password && (
+                     <div className="grid gap-2">
+                        <div className="flex items-center">
+                           <Label htmlFor="password">Password</Label>
+                           <a
+                              href="#"
+                              className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                           >
+                              Forgot your password?
+                           </a>
+                        </div>
+                        <Input
+                           id="password"
+                           type="password"
+                           autoComplete="current-password"
+                           {...register('password')}
+                        />
+                        {errors.password && (
+                           <p className="text-destructive text-sm">
+                              {errors.password.message}
+                           </p>
+                        )}
+                     </div>
+
+                     {submitError && (
                         <p className="text-destructive text-sm">
-                           {errors.password.message}
+                           {submitError}
                         </p>
                      )}
+
+                     <CardFooter className="flex-col gap-2 px-0 pb-0">
+                        <Button
+                           type="submit"
+                           className="w-full"
+                           disabled={isSubmitting}
+                        >
+                           {isSubmitting ? 'Logging in...' : 'Login'}
+                        </Button>
+                     </CardFooter>
                   </div>
-
-                  {submitError && (
-                     <p className="text-destructive text-sm">{submitError}</p>
-                  )}
-
-                  <CardFooter className="flex-col gap-2 px-0 pb-0">
-                     <Button
-                        type="submit"
-                        className="w-full"
-                        disabled={isSubmitting}
-                     >
-                        {isSubmitting ? 'Logging in...' : 'Login'}
-                     </Button>
-                  </CardFooter>
-               </div>
-            </form>
-         </CardContent>
-      </Card>
+               </form>
+            </CardContent>
+         </Card>
+      </div>
    );
 };
 

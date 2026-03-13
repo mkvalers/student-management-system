@@ -1,17 +1,13 @@
-import './App.css';
-import LoginPage from './pages/auth/LoginPage';
+import { RouterProvider } from 'react-router-dom';
+import router from './routes';
 
 /**
- * Application shell.
+ * Application shell. Bootstraps the client-side router.
  *
  * @returns The router provider for the SPA
  */
 function App() {
-   return (
-      <div className="flex justify-center items-center h-screen">
-         <LoginPage />
-      </div>
-   );
+   return <RouterProvider router={router} />;
 }
 
 export default App;
