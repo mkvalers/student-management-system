@@ -12,17 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import useAuthService from '@/services/useAuthService';
 import useAuthStore from '@/stores/auth.store';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-const loginSchema = z.object({
-   email: z.email('Please enter a valid email address.'),
-   password: z.string().trim().min(1, 'Password is required.'),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
+import useLoginForm, { type LoginFormValues } from './hooks/useLoginForm';
 
 /**
  * Login page component for user authentication.
@@ -32,19 +23,11 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 const LoginPage = () => {
    const [submitError, setSubmitError] = useState<string>('');
    const setAccessToken = useAuthStore((state) => state.setAccessToken);
-
    const {
       register,
       handleSubmit,
       formState: { errors, isSubmitting },
-   } = useForm<LoginFormValues>({
-      resolver: zodResolver(loginSchema),
-      defaultValues: {
-         email: '',
-         password: '',
-      },
-      mode: 'onBlur',
-   });
+   } = useLoginForm();
 
    const onSubmit = async (values: LoginFormValues) => {
       setSubmitError('');
